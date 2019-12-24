@@ -11,7 +11,7 @@ class MRMeanWordSizeFinder(MRJob):
     
     def mapper(self, _, line):
         for word in WORD_RE.findall(line):
-            yield '', len(word)
+            yield None, len(word)
 
     def reducer(self, _, sizes):
         yield 'Average word length', str(mean(sizes))

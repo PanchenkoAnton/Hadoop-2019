@@ -10,10 +10,10 @@ class MRMaxWordSizeFinder(MRJob):
     
     def mapper(self, _, line):
         for word in WORD_RE.findall(line):
-            yield '', word
+            yield None, word
 
     def combiner(self, _, words):
-        yield '', max(words, key=lambda word: len(word))
+        yield None, max(words, key=lambda word: len(word))
 
     def reducer(self, _, words):
         maxw = max(words, key=lambda word: len(word))
